@@ -112,7 +112,7 @@ class DataRouter(object):
         if six.PY3:
             # tensorflow sessions are not fork-safe,
             # and training processes have to be spawned instead of forked.
-            # See https://github.com/tensorflow/tensorflow/issues/5448#issuecomment-258934405
+            # See https://github.com/tensorflow/tensorflow/issues/5448#issuecomment-258934405  # nopep8
             multiprocessing.set_start_method('spawn', force=True)
 
         self.pool = ProcessPool(self._training_processes)

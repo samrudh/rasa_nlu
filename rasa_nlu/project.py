@@ -99,8 +99,11 @@ def _get_remote_model_name(filename):
         return MODEL_NAME_PREFIX + timestamp
 
 
-def _pull_model_and_fingerprint(model_server, model_directory, fingerprint):
-    # type: (EndpointConfig, Text, Optional[Text]) -> (Optional[Text], Optional[Text])
+def _pull_model_and_fingerprint(model_server,  # type: EndpointConfig
+                                model_directory,  # type: Text
+                                fingerprint  # type: Optional[Text]
+                                ):
+    # type:(...) -> (Optional[Text], Optional[Text])
     """Queries the model server and returns a tuple of containing the
 
     response's <ETag> header which contains the model hash, and the

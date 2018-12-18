@@ -30,13 +30,15 @@ class DialogflowReader(TrainingDataReader):
         fformat = kwargs["fformat"]
 
         if fformat not in {DIALOGFLOW_INTENT, DIALOGFLOW_ENTITIES}:
-            raise ValueError("fformat must be either {}, or {}".format(DIALOGFLOW_INTENT, DIALOGFLOW_ENTITIES))
+            raise ValueError("fformat must be either {}, or {}"
+                             "".format(DIALOGFLOW_INTENT, DIALOGFLOW_ENTITIES))
 
         root_js = utils.read_json_file(fn)
         examples_js = self._read_examples_js(fn, language, fformat)
 
         if not examples_js:
-            logger.warning("No training examples found for dialogflow file {}!".format(fn))
+            logger.warning("No training examples found for dialogflow file {}!"
+                           "".format(fn))
             return TrainingData()
         elif fformat == DIALOGFLOW_INTENT:
             return self._read_intent(root_js, examples_js)
@@ -84,8 +86,11 @@ class DialogflowReader(TrainingDataReader):
         return TrainingData([], entity_synonyms)
 
     def _read_examples_js(self, fn, language, fformat):
-        """Infer and load the example file based on the root filename and root format."""
-        examples_type = "usersays" if fformat == DIALOGFLOW_INTENT else "entries"
+        """Infer and load the example file based on the root filename and
+        root format."""
+        examples_type = ("usersays"
+                         if fformat == DIALOGFLOW_INTENT
+                         else "entries")
         examples_fn_ending = "_{}_{}.json".format(examples_type, language)
         examples_fn = fn.replace(".json", examples_fn_ending)
         if os.path.isfile(examples_fn):

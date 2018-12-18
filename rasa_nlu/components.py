@@ -374,9 +374,9 @@ class ComponentBuilder(object):
 
         component_class = registry.get_component_class(component_name)
         cache_key = component_class.cache_key(model_metadata)
-        if (cache_key is not None
-                and self.use_cache
-                and cache_key in self.component_cache):
+        if (cache_key is not None and
+                self.use_cache and
+                cache_key in self.component_cache):
             return self.component_cache[cache_key], cache_key
         else:
             return None, cache_key

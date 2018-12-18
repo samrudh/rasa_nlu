@@ -417,8 +417,8 @@ def do_entities_overlap(entities):
     for i in range(len(sorted_entities) - 1):
         curr_ent = sorted_entities[i]
         next_ent = sorted_entities[i + 1]
-        if (next_ent["start"] < curr_ent["end"]
-                and next_ent["entity"] != curr_ent["entity"]):
+        if (next_ent["start"] < curr_ent["end"] and
+                next_ent["entity"] != curr_ent["entity"]):
             return True
 
     return False

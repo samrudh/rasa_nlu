@@ -45,8 +45,8 @@ def create_argument_parser():
                              'server. \nIf given `all` as input all the models '
                              'will be loaded.\nElse you can specify a list of '
                              'specific project names.\nEg: python -m '
-                             'rasa_nlu.server --pre_load project1 --path projects '
-                             '-c config.yaml')
+                             'rasa_nlu.server --pre_load project1 '
+                             '--path projects -c config.yaml')
     parser.add_argument('-t', '--token',
                         help="auth token. If set, reject requests which don't "
                              "provide this token as a query parameter")
@@ -77,7 +77,8 @@ def create_argument_parser():
                         help='Number of parallel threads to use for '
                              'handling parse requests.')
     parser.add_argument('--endpoints',
-                        help='Configuration file for the model server as a yaml file')
+                        help='Configuration file for the model server '
+                             'as a yaml file')
     parser.add_argument('--wait_time_between_pulls',
                         type=int,
                         default=10,

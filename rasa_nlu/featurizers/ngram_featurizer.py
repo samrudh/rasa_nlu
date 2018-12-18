@@ -160,9 +160,9 @@ class NGramFeaturizer(Featurizer):
 
         Excludes every word with digits in them, hyperlinks or
         an assigned word vector."""
-        return (not token.has_vector and not token.like_url
-                and not token.like_num and not token.like_email
-                and not token.is_punct)
+        return (not token.has_vector and not token.like_url and not
+                token.like_num and not token.like_email and not
+                token.is_punct)
 
     def _remove_in_vocab_words_from_sentence(self, example):
         """Filter for words that do not have a word vector."""
@@ -306,11 +306,11 @@ class NGramFeaturizer(Featurizer):
                     begin = can[:-1]
                     end = can[1:]
                     if n >= ngram_min_length:
-                        if (counters[n - 1][begin] == counters[n][can]
-                                and begin in features[n - 1]):
+                        if (counters[n - 1][begin] == counters[n][can] and
+                                begin in features[n - 1]):
                             features[n - 1].remove(begin)
-                        if (counters[n - 1][end] == counters[n][can]
-                                and end in features[n - 1]):
+                        if (counters[n - 1][end] == counters[n][can] and
+                                end in features[n - 1]):
                             features[n - 1].remove(end)
 
         return [item for sublist in list(features.values()) for item in sublist]

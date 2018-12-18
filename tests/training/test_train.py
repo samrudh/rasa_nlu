@@ -92,7 +92,8 @@ def test_random_seed(component_builder, tmpdir):
 
     _config = utilities.base_test_conf("tensorflow_embedding")
     # set fixed random seed to 1
-    _config.set_component_attr("intent_classifier_tensorflow_embedding", random_seed=1)
+    _config.set_component_attr("intent_classifier_tensorflow_embedding",
+                               random_seed=1)
     # first run
     (trained_a, _, persisted_path_a) = train.do_train(
             _config,

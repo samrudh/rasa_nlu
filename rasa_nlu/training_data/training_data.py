@@ -199,7 +199,8 @@ class TrainingData(object):
                                         self.MIN_EXAMPLES_PER_ENTITY))
 
     def train_test_split(self, train_frac=0.8):
-        """Split into a training and test dataset, preserving the fraction of examples per intent."""
+        """Split into a training and test dataset, preserving the
+        fraction of examples per intent."""
         train, test = [], []
         for intent, count in self.examples_per_intent.items():
             ex = [e for e in self.intent_examples if e.data["intent"] == intent]

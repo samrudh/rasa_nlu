@@ -22,7 +22,8 @@ class LuisReader(JsonTrainingDataReader):
 
         # Simple check to ensure we support this luis data schema version
         if not js["luis_schema_version"].startswith("2"):
-            raise Exception("Invalid luis data schema version {}, should be 2.x.x. "
+            raise Exception("Invalid luis data schema version {}, should be "
+                            "2.x.x. "
                             "Make sure to use the latest luis version "
                             "(e.g. by downloading your data again)."
                             "".format(js["luis_schema_version"]))

@@ -85,9 +85,11 @@ def validate_rasa_nlu_data(data):
     try:
         validate(data, _rasa_nlu_data_schema())
     except ValidationError as e:
-        e.message += (". Failed to validate training data, make sure your data "
-                      "is valid. For more information about the format visit "
-                      "https://github.com/RasaHQ/rasa_nlu/blob/master/docs/dataformat.rst")
+        e.message += (
+            ". Failed to validate training data, make sure your data "
+            "is valid. For more information about the format visit "
+            "https://github.com/RasaHQ/rasa_nlu/blob/master/docs/dataformat.rst"
+        )
         raise e
 
 

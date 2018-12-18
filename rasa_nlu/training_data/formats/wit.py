@@ -32,7 +32,8 @@ class WitReader(JsonTrainingDataReader):
                         if ("start" in e and "end" in e and
                             e["entity"] != 'intent')]
             for e in entities:
-                # for some reason wit adds additional quotes around entity values
+                # for some reason wit adds additional quotes
+                # around entity values
                 e["value"] = e["value"].strip("\"")
 
             data = {}

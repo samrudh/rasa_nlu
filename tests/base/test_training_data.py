@@ -69,7 +69,8 @@ def test_dialogflow_data():
     assert len(td.training_examples) == 24
     assert td.intents == {"affirm", "goodbye", "hi", "inform"}
     assert td.entities == {"cuisine", "location"}
-    non_trivial_synonyms = {k: v for k, v in td.entity_synonyms.items() if k != v}
+    non_trivial_synonyms = {k: v for k, v in td.entity_synonyms.items()
+                            if k != v}
     assert non_trivial_synonyms == {"mexico": "mexican",
                                     "china": "chinese",
                                     "india": "indian"}
@@ -97,7 +98,8 @@ def test_lookup_table_md():
         'mojito', 'lemonade', 'sweet berry wine', 'tea', 'club mate']
 
 
-@pytest.mark.parametrize("filename", ["data/examples/rasa/demo-rasa.json", 'data/examples/rasa/demo-rasa.md'])
+@pytest.mark.parametrize("filename", ["data/examples/rasa/demo-rasa.json",
+                                      'data/examples/rasa/demo-rasa.md'])
 def test_demo_data(filename):
     td = training_data.load_data(filename)
     assert td.intents == {"affirm", "greet", "restaurant_search", "goodbye"}
@@ -112,8 +114,8 @@ def test_demo_data(filename):
                                   'vegg': 'vegetarian',
                                   'veggie': 'vegetarian'}
 
-    assert td.regex_features == [{"name": "greet", "pattern": "hey[^\s]*"},
-                                 {"name": "zipcode", "pattern": "[0-9]{5}"}]
+    assert td.regex_features == [{"name": "greet", "pattern": r"hey[^\s]*"},
+                                 {"name": "zipcode", "pattern": r"[0-9]{5}"}]
 
 
 @pytest.mark.parametrize("filename", ['data/examples/rasa/demo-rasa.md'])
@@ -130,8 +132,10 @@ def test_train_test_split(filename):
     assert len(td_test.training_examples) == 10
 
 
-@pytest.mark.parametrize("files", [('data/examples/rasa/demo-rasa.json', 'data/test/multiple_files_json'),
-                                   ('data/examples/rasa/demo-rasa.md', 'data/test/multiple_files_markdown')])
+@pytest.mark.parametrize("files", [('data/examples/rasa/demo-rasa.json',
+                                    'data/test/multiple_files_json'),
+                                   ('data/examples/rasa/demo-rasa.md',
+                                    'data/test/multiple_files_markdown')])
 def test_data_merging(files):
     td_reference = training_data.load_data(files[0])
     td = training_data.load_data(files[1])
@@ -145,10 +149,13 @@ def test_data_merging(files):
 
 
 def test_markdown_single_sections():
-    td_regex_only = training_data.load_data('data/test/markdown_single_sections/regex_only.md')
-    assert td_regex_only.regex_features == [{"name": "greet", "pattern": "hey[^\s]*"}]
+    td_regex_only = training_data.load_data(
+        'data/test/markdown_single_sections/regex_only.md')
+    assert td_regex_only.regex_features == [{"name": "greet",
+                                             "pattern": r"hey[^\s]*"}]
 
-    td_syn_only = training_data.load_data('data/test/markdown_single_sections/synonyms_only.md')
+    td_syn_only = training_data.load_data(
+        'data/test/markdown_single_sections/synonyms_only.md')
     assert td_syn_only.entity_synonyms == {'Chines': 'chinese',
                                            'Chinese': 'chinese'}
 
