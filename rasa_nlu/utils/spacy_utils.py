@@ -17,7 +17,7 @@ from rasa_nlu.config import RasaNLUModelConfig
 from rasa_nlu.training_data import Message
 from rasa_nlu.training_data import TrainingData
 
-import en_core_web_md
+import en_core_web_sm
 
 logger = logging.getLogger(__name__)
 
@@ -62,7 +62,7 @@ class SpacyNLP(Component):
         import spacy
 
         component_conf = cfg.for_component(cls.name, cls.defaults)
-        spacy_model_name = "en_core_web_md" #component_conf.get("model")
+        spacy_model_name = "en_core_web_sm" #component_conf.get("model")
 
         # if no model is specified, we fall back to the language string
         if not spacy_model_name:
@@ -72,7 +72,8 @@ class SpacyNLP(Component):
         logger.info("Trying to load spacy model with "
                     "name '{}'".format(spacy_model_name))
 
-        nlp = spacy.load(spacy_model_name, parser=False)
+        #nlp = spacy.load(spacy_model_name, parser=False)
+        nlp = en_core_web_sm.load()
         cls.ensure_proper_language_model(nlp)
         return SpacyNLP(component_conf, nlp)
 
@@ -126,7 +127,7 @@ class SpacyNLP(Component):
         model_name = component_meta.get("model")
 
         #nlp = spacy.load(model_name, parser=False)
-        nlp = en_core_web_md.load()
+        nlp = en_core_web_sm.load()
         cls.ensure_proper_language_model(nlp)
         return cls(component_meta, nlp)
 
