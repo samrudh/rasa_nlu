@@ -17,6 +17,8 @@ from rasa_nlu.config import RasaNLUModelConfig
 from rasa_nlu.training_data import Message
 from rasa_nlu.training_data import TrainingData
 
+import en_core_web_md
+
 logger = logging.getLogger(__name__)
 
 if typing.TYPE_CHECKING:
@@ -60,7 +62,7 @@ class SpacyNLP(Component):
         import spacy
 
         component_conf = cfg.for_component(cls.name, cls.defaults)
-        spacy_model_name = component_conf.get("model")
+        spacy_model_name = "en_core_web_md" #component_conf.get("model")
 
         # if no model is specified, we fall back to the language string
         if not spacy_model_name:
@@ -123,7 +125,8 @@ class SpacyNLP(Component):
         component_meta = model_metadata.for_component(cls.name)
         model_name = component_meta.get("model")
 
-        nlp = spacy.load(model_name, parser=False)
+        #nlp = spacy.load(model_name, parser=False)
+        nlp = en_core_web_md.load()
         cls.ensure_proper_language_model(nlp)
         return cls(component_meta, nlp)
 
